@@ -4,18 +4,21 @@ const SLIDES = [
     title: "Wedding guest edits",
     subtitle: "Saved looks with clearer fit signals",
     image: "/images/hero-wedding.jpg",
+    target: "saved-for-you-heading",
   },
   {
     id: "slide-western",
     title: "Everyday western",
     subtitle: "Size confidence before you decide",
     image: "/images/hero-western.jpg",
+    target: "featured-heading",
   },
   {
     id: "slide-footwear",
     title: "Footwear favorites",
     subtitle: "Revisit what you saved, without the wait-and-forget",
     image: "/images/hero-footwear.jpg",
+    target: "saved-for-you-heading",
   },
 ] as const;
 
@@ -45,9 +48,17 @@ export function HeroCarousel() {
                 <p className="mt-1 max-w-[85%] text-sm text-white/90">
                   {slide.subtitle}
                 </p>
-                <span className="mt-4 inline-flex w-fit rounded-full bg-white px-4 py-1.5 text-xs font-semibold text-nykaa-pink">
+                <button
+                  type="button"
+                  onClick={() =>
+                    document
+                      .getElementById(slide.target)
+                      ?.scrollIntoView({ behavior: "smooth", block: "start" })
+                  }
+                  className="mt-4 inline-flex w-fit rounded-full bg-white px-4 py-1.5 text-xs font-semibold text-nykaa-pink"
+                >
                   Explore →
-                </span>
+                </button>
               </div>
             </div>
           </li>

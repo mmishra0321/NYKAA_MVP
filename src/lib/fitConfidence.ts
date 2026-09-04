@@ -117,8 +117,8 @@ function tryPersonal(
 
   const shortLabel =
     topsHintSize && topsHintSize !== bestSize
-      ? `Keep ${topsHintSize} in tops · ${bestSize} here`
-      : `Fits your profile · ${bestSize}`;
+      ? `Keep ${topsHintSize} · ${bestSize} here`
+      : `Your size · ${bestSize}`;
 
   const detail =
     returnedM && bestSize === "L"
@@ -158,7 +158,7 @@ function tryCrowd(
   return {
     source: "crowd",
     confidentSize: best.size,
-    shortLabel: `${formatPct(best.rate)} kept size ${best.size}`,
+    shortLabel: `${formatPct(best.rate)} kept ${best.size}`,
     detail: `Across ${best.samples} buyers of this item in size ${best.size}, ${formatPct(best.rate)} kept it without a fit return.`,
     keepRate: best.rate,
   };

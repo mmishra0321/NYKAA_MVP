@@ -32,7 +32,7 @@ export const UI_COPY_CORPUS: string[] = [
   "You're set. Fit notes checked",
   "Added in your confident size where we had a signal. No codes, no pressure. Just clearer decisions.",
   "Categories",
-  "Demo stub. Confidence-to-Cart lives on Home and Wishlist.",
+  "Browse into Saved looks with Fit Confidence on Home.",
 ];
 
 export function runCopyLintSweep(): { ok: boolean; hits: string[] } {

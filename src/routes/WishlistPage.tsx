@@ -56,7 +56,7 @@ export function WishlistPage() {
           },
         },
       });
-      showToast(`Added in size ${size}`);
+      showToast("Complete the look ready in bag");
       navigate("/cart");
     },
     [dispatch, navigate, showToast],

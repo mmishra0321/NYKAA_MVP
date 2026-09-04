@@ -36,6 +36,17 @@ export function HomePage() {
     return () => window.clearTimeout(id);
   }, [highlightedProductId, dispatch]);
 
+  useEffect(() => {
+    const hash = window.location.hash.replace(/^#/, "");
+    if (!hash) return;
+    const t = window.setTimeout(() => {
+      document
+        .getElementById(hash)
+        ?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 80);
+    return () => window.clearTimeout(t);
+  }, []);
+
   const addAndGo = useCallback(
     (productId: string, size: Size) => {
       dispatch({

@@ -46,6 +46,13 @@ export function SimulateTriggerPanel({
   if (options.length === 0) return null;
 
   const selected = productId || options[0].productId;
+  const selectedBadge =
+    options.find((o) => o.productId === selected)?.badge ??
+    badgesByProductId[selected];
+  const sizeTriggersBlocked =
+    !selectedBadge ||
+    selectedBadge.source === "insufficient" ||
+    !selectedBadge.confidentSize;
 
   return (
     <section className="rounded-panel border border-dashed border-nykaa-pink/40 bg-nykaa-pink/[0.03] p-4">
@@ -54,7 +61,7 @@ export function SimulateTriggerPanel({
       </p>
       <p className="mt-1 text-xs text-nykaa-muted">
         Force-fires a qualifying event (not a generic reminder). Paired fit copy
-        is included.
+        is included. Size-based triggers need Fit Confidence.
       </p>
 
       <label className="mt-3 block text-xs font-medium text-nykaa-ink">
@@ -73,16 +80,27 @@ export function SimulateTriggerPanel({
       </label>
 
       <div className="mt-3 grid grid-cols-2 gap-2">
-        {TRIGGERS.map((trigger) => (
-          <button
-            key={trigger}
-            type="button"
-            onClick={() => onSimulate(selected, trigger)}
-            className="rounded-full border border-nykaa-hairline bg-nykaa-surface px-3 py-2 text-xs font-semibold text-nykaa-ink transition hover:border-nykaa-pink hover:text-nykaa-pink"
-          >
-            {TRIGGER_LABELS[trigger]}
-          </button>
-        ))}
+        {TRIGGERS.map((trigger) => {
+          const sizeSpecific =
+            trigger === "back_in_stock" || trigger === "low_stock";
+          const disabled = sizeSpecific && sizeTriggersBlocked;
+          return (
+            <button
+              key={trigger}
+              type="button"
+              disabled={disabled}
+              title={
+                disabled
+                  ? "Needs Fit Confidence size. Try Price stable or Occasion."
+                  : undefined
+              }
+              onClick={() => onSimulate(selected, trigger)}
+              className="rounded-full border border-nykaa-hairline bg-nykaa-surface px-3 py-2 text-xs font-semibold text-nykaa-ink transition hover:border-nykaa-pink hover:text-nykaa-pink disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:border-nykaa-hairline disabled:hover:text-nykaa-ink"
+            >
+              {TRIGGER_LABELS[trigger]}
+            </button>
+          );
+        })}
       </div>
     </section>
   );

@@ -169,25 +169,22 @@ export function simulateTriggerOnProduct(
     throw new Error(`simulateTriggerOnProduct: unknown product ${productId}`);
   }
 
-  // For insufficient + size-specific, still allow demo fire with a synthetic size note
-  // by temporarily treating badge as crowd M for copy only when simulating.
-  const badgeForCopy: FitBadge =
-    (trigger === "back_in_stock" || trigger === "low_stock") &&
+  // Never invent fit for insufficient SKUs — size-specific demos need a real confident size.
+  const sizeSpecific =
+    trigger === "back_in_stock" || trigger === "low_stock";
+  if (
+    sizeSpecific &&
     (badge.source === "insufficient" || !badge.confidentSize)
-      ? {
-          ...badge,
-          source: "crowd",
-          confidentSize: "M",
-          shortLabel: badge.shortLabel,
-          detail: badge.detail,
-          keepRate: 0.7,
-        }
-      : badge;
+  ) {
+    throw new Error(
+      "Not enough fit data for this item. Pick a product with Fit Confidence, or simulate Price stable / Occasion.",
+    );
+  }
 
   const prev = previousNudges.find(
     (n) => n.id === nudgeId(productId, trigger),
   );
-  const nudge = makeNudge(product, badgeForCopy, trigger, prev
+  const nudge = makeNudge(product, badge, trigger, prev
     ? { ...prev, dismissed: false, read: false }
     : undefined);
 

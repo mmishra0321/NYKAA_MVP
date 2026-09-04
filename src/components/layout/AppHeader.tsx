@@ -28,7 +28,10 @@ export function AppHeader() {
             type="search"
             readOnly
             placeholder="Search on Nykaa"
-            className="w-full rounded-md border-0 bg-[#F3F3F3] py-2 pl-9 pr-3 text-sm text-nykaa-ink placeholder:text-nykaa-muted focus:outline-none focus:ring-1 focus:ring-nykaa-pink/40"
+            title="Demo: search is illustrative only"
+            aria-description="Demo only. Search is not connected."
+            className="w-full cursor-default rounded-md border-0 bg-[#F3F3F3] py-2 pl-9 pr-3 text-sm text-nykaa-ink placeholder:text-nykaa-muted focus:outline-none focus:ring-1 focus:ring-nykaa-pink/40"
+            onFocus={(e) => e.currentTarget.blur()}
           />
         </label>
 

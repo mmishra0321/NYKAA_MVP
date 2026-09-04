@@ -1,6 +1,6 @@
 # Confidence-to-Cart — Architecture & Implementation Plan
 
-> **Plan only.** Do not treat this file as permission to implement. Product scope, KPI, layers, constraints, and success criteria are defined only in **[problemStatement.md](./problemStatement.md)**. If the two conflict, amend the problem statement first.
+> **Status: shipped (Phases 0–8).** Live demo: [https://nykaa-mvp-kappa.vercel.app](https://nykaa-mvp-kappa.vercel.app). Product scope, KPI, layers, constraints, and success criteria remain defined in **[problemStatement.md](./problemStatement.md)**. If the two conflict, amend the problem statement first. This file is the technical plan + as-built notes.
 
 **Delivery form:** a **React UI MVP** — clickable, mobile-first, publicly deployable prototype. No real backend, payments, push infra, or ML training. Fit scores, triggers, and recommendations are computed in the browser from seeded mock data so a tester can walk the full three-layer loop on a shareable link.
 
@@ -52,7 +52,7 @@
 | **Product** | Nykaa Fashion (`com.fsn.nds` / `1439872423`) |
 | **KPI informed** | ↑ % users who buy ≥1 wishlisted item within 30 days of save |
 | **Hard constraint** | No coupons, discounts, cashback, price-cuts, or flash-sale framing (even if live Nykaa screenshots show % off) |
-| **Audience for demo** | Graders / PMs on **localhost** (Vercel later if asked) |
+| **Audience for demo** | Graders / PMs on **live Vercel** (localhost still supported) |
 | **Form** | React SPA (Vite), **mobile app frame** (~390px), Nykaa visual language |
 | **Visual refs** | [`docs/references/nykaa-home-desktop.png`](./docs/references/nykaa-home-desktop.png), [`docs/references/nykaa-plp-desktop.png`](./docs/references/nykaa-plp-desktop.png) — **adapt to app**, do not ship desktop chrome |
 | **State** | One `ConfidenceToCartContext` — in-memory |
@@ -65,7 +65,7 @@
 2. Tap **bell** → **notification sidebar**; simulate/open ≥1 of the **4** trigger types; read **paired** confidence + trigger copy.
 3. One-click **Move to Cart** (Home or Wishlist) in the **confident size**.
 4. See **Complete the Look** at the add-to-bag moment (≥1 complement).
-5. Complete the loop on localhost using DEMO.md without the builder driving clicks.
+5. Complete the loop on the live URL (or localhost) using DEMO.md without the builder driving clicks.
 6. **Reset demo** to replay.
 
 ---
@@ -672,7 +672,7 @@ flowchart TB
 
 ---
 
-### Phase 8 — Nykaa app-home UX revision (**plan locked; implement only when asked**)
+### Phase 8 — Nykaa app-home UX revision (**shipped**)
 
 **Goal:** Replace the current PM-style Home / separate Nudges tab with a **Nykaa mobile-app Home** + **notification sidebar**, per §24.
 
@@ -708,16 +708,17 @@ flowchart TB
 ```mermaid
 flowchart LR
     Dev["npm run dev → :5173"] --> Build["npm run build"]
+    Build --> Vercel["Vercel production"]
     Build --> Preview["npm run serve → :4173"]
 ```
 
 | Item | Choice |
 |---|---|
-| Host (now) | **Localhost** — Vite dev or `vite preview` |
-| Host (later) | Vercel when explicitly requested (`vercel.json` ready) |
+| Host (now) | **Vercel** — [https://nykaa-mvp-kappa.vercel.app](https://nykaa-mvp-kappa.vercel.app) |
+| Host (local) | Vite `npm run dev` / `npm run serve` |
 | Backend | None |
 | Env vars | None required for V1 |
-| SPA | Client-side React Router; Vite preview serves `index.html` for app routes |
+| SPA | Client-side React Router; `vercel.json` rewrites → `index.html` |
 
 ---
 
@@ -749,14 +750,14 @@ flowchart LR
 
 ## 22. Definition of done
 
-1. React + Vite SPA runnable on **localhost** (`npm run dev` / `npm run serve`).
+1. React + Vite SPA runnable on **localhost** and **Vercel** ([nykaa-mvp-kappa.vercel.app](https://nykaa-mvp-kappa.vercel.app)).
 2. **Nykaa app Home** shows Fit Confidence on home tiles (personal, crowd, insufficient).
 3. **Bell → sidebar** exposes all 4 trigger types (simulate + paired copy); no Nudges tab required.
 4. One-click Move to Cart uses confident size (or picker only when insufficient).
 5. Complete the Look shows ≥1 complementary item at add-to-bag / Cart.
 6. Reset demo restores seed.
 7. No monetary incentive language in UI (including hero/carousel).
-8. README + DEMO.md document the localhost grader path.
+8. README + DEMO.md document the live + localhost grader path.
 9. Third party can complete the loop from Home without the builder.
 
 ---
@@ -895,11 +896,10 @@ Phases 0–7 proved the three-layer **logic**. The present Home is still a **PM 
 - Rebuilding real Nykaa catalog / login / filters  
 - Beauty PLP (M.A.C screenshot is **style** reference; MVP stays Fashion wishlist slice)  
 - Real push notifications  
-- Vercel production deploy  
 
 ---
 
 ## Implementation order (when build is requested)
 
-Phases **0–7** (logic + localhost) are in place.  
-**Next build:** Phase **8** only — after explicit approval. Prefer vertical slices that keep the three-layer loop demoable from **app Home**.
+Phases **0–8** are in place (logic + Nykaa app Home + Vercel).  
+Live demo: [https://nykaa-mvp-kappa.vercel.app](https://nykaa-mvp-kappa.vercel.app). Prefer vertical fixes that keep the three-layer loop demoable from **app Home**.

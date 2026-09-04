@@ -15,7 +15,7 @@ export function BottomNav() {
 
   return (
     <nav
-      className="fixed bottom-0 left-1/2 z-30 w-full max-w-[480px] -translate-x-1/2 border-t border-nykaa-hairline bg-nykaa-surface pb-[env(safe-area-inset-bottom,0px)]"
+      className="fixed bottom-0 left-1/2 z-30 w-full max-w-[430px] -translate-x-1/2 border-t border-nykaa-hairline bg-nykaa-surface pb-[env(safe-area-inset-bottom,0px)]"
       aria-label="Bottom"
     >
       <ul className="grid grid-cols-4 px-2 py-2">

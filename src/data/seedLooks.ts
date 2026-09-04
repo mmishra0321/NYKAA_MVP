@@ -6,7 +6,7 @@
 export const seedLookPairs: Record<string, string[]> = {
   "aurelia-floral-dress": ["sassafras-rib-top", "aurelia-wrap-top"],
   "sassafras-rib-top": ["sassafras-midi-dress"],
-  "atelier-nova-slip": [],
+  "atelier-nova-slip": ["aurelia-wrap-top"],
   "aurelia-wrap-top": ["aurelia-floral-dress"],
   "sassafras-midi-dress": ["sassafras-rib-top"],
   "aurelia-linen-co-ord": ["sassafras-midi-dress"],

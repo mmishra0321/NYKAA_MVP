@@ -79,13 +79,21 @@ export function ConfidenceToCartProvider({ children }: { children: ReactNode }) 
       if (!badge) {
         return "No fit badge for that item.";
       }
-      const { products, nudge } = simulateTriggerOnProduct(
-        state.products,
-        productId,
-        trigger,
-        badge,
-        state.nudges,
-      );
+      let products;
+      let nudge;
+      try {
+        ({ products, nudge } = simulateTriggerOnProduct(
+          state.products,
+          productId,
+          trigger,
+          badge,
+          state.nudges,
+        ));
+      } catch (err) {
+        return err instanceof Error
+          ? err.message
+          : "Could not simulate that trigger.";
+      }
       // Re-evaluate all after flag mutation, then ensure simulated nudge is present
       const badges = computeBadgesForWishlist(
         state.user,
