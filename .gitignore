@@ -39,3 +39,4 @@ dist-ssr
 
 # Vercel
 .vercel
+.env*
