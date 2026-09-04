@@ -1,14 +1,15 @@
 # Confidence-to-Cart — Demo script
 
-Validate the MVP on **localhost** (Nykaa **app** Home + notification sidebar).
+Validate the MVP on the **live** or **localhost** URL (Nykaa **app** Home + notification sidebar).
 
-**Start:** `npm run dev` → [http://127.0.0.1:5173/](http://127.0.0.1:5173/)
+**Live:** [https://nykaa-mvp-kappa.vercel.app](https://nykaa-mvp-kappa.vercel.app)  
+**Local:** `npm run dev` → [http://127.0.0.1:5173/](http://127.0.0.1:5173/)
 
 ## Happy path
 
 | # | Step | Expected |
 |---|---|---|
-| 1 | Open **http://127.0.0.1:5173/** | App Home: NYKAA + search + **bell** + bag; category chips; hero; **Saved for you** |
+| 1 | Open the live URL (or localhost) | App Home: NYKAA + search + **bell** + bag; category chips; hero; **Saved for you** |
 | 2 | Point at Fit Confidence on home cards | **personal / crowd / insufficient** visible without tap-through |
 | 3 | Tap **bell** | Notification **sidebar** slides in (not a separate Nudges tab) |
 | 4 | **Demo · Simulate** → Back in stock (or Occasion) | Toast + paired trigger + fit copy in the panel |
@@ -32,4 +33,4 @@ Validate the MVP on **localhost** (Nykaa **app** Home + notification sidebar).
 - [ ] ≥1 nudge via **bell → sidebar** with paired copy
 - [ ] One-click add-to-cart in confident size
 - [ ] ≥1 Complete the Look suggestion
-- [ ] Loop works on localhost without the builder
+- [ ] Loop works on the live URL (or localhost) without the builder
